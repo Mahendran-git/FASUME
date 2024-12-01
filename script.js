@@ -8,64 +8,76 @@ const buttons = {
     getStarted: document.getElementById("get-started"),
     backToHome1: document.getElementById("back-to-home-1"),
     backToHome2: document.getElementById("back-to-home-2"),
+    generateResume: document.getElementById("generate-resume"),
+    downloadResume: document.getElementById("download-resume"),
 };
 
-function showPage(pageToShow) {
-    Object.values(pages).forEach((page) => (page.style.display = "none"));
-    pageToShow.style.display = "block";
-}
-
-showPage(pages.home);
-
-buttons.getStarted.addEventListener("click", () => showPage(pages.form));
-buttons.backToHome1.addEventListener("click", () => showPage(pages.home));
-buttons.backToHome2.addEventListener("click", () => showPage(pages.home));
-
 const form = document.getElementById("resume-form");
-const resumeContent = document.getElementById("resume-content");
+const resumeDisplay = document.getElementById("resume-content");
 
-form.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    const fields = ["name", "email", "phone", "address", "summary", "skills", "experience", "education", "projects", "certifications"];
-    const data = {};
-
-    fields.forEach((field) => {
-        data[field] = document.getElementById(field).value || "Not Provided";
-    });
-
-    const resumeColor = document.getElementById("resume-color").value;
-    document.getElementById("resume-display").style.borderTopColor = resumeColor;
-
-    resumeContent.innerHTML = `
-        <h3>${data.name}</h3>
-        <p><strong>Email:</strong> ${data.email}</p>
-        <p><strong>Phone:</strong> ${data.phone}</p>
-        <p><strong>Address:</strong> ${data.address}</p>
-        <h4>Summary</h4>
-        <p>${data.summary}</p>
-        <h4>Skills</h4>
-        <p>${data.skills}</p>
-        <h4>Experience</h4>
-        <p>${data.experience}</p>
-        <h4>Education</h4>
-        <p>${data.education}</p>
-        <h4>Projects</h4>
-        <p>${data.projects}</p>
-        <h4>Certifications</h4>
-        <p>${data.certifications}</p>
-    `;
-
-    showPage(pages.resume);
+buttons.getStarted.addEventListener("click", () => {
+    pages.home.classList.remove("active");
+    pages.form.classList.add("active");
 });
 
-document.getElementById("download-resume").addEventListener("click", () => {
-    const opt = {
-        margin: 0.5,
-        filename: "Resume.pdf",
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
-    };
+buttons.backToHome1.addEventListener("click", () => {
+    pages.form.classList.remove("active");
+    pages.home.classList.add("active");
+});
 
-    html2pdf().set(opt).from(resumeContent).save();
+buttons.backToHome2.addEventListener("click", () => {
+    pages.resume.classList.remove("active");
+    pages.home.classList.add("active");
+});
+
+buttons.generateResume.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const phone = document.getElementById("phone").value;
+    const address = document.getElementById("address").value;
+    const summary = document.getElementById("summary").value;
+    const skills = document.getElementById("skills").value;
+    const experience = document.getElementById("experience").value;
+    const education = document.getElementById("education").value;
+    const projects = document.getElementById("projects").value;
+    const certifications = document.getElementById("certifications").value;
+    const languages = document.getElementById("languages").value;
+    const tools = document.getElementById("tools").value;
+    const linkedinUrl = document.getElementById("linkedin-url").value;
+    const borderColor = document.getElementById("resume-color").value;
+
+    const resumeContent = `
+        <h1 style="color: ${borderColor};">${name}</h1>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Phone:</strong> ${phone}</p>
+        <p><strong>Address:</strong> ${address}</p>
+        <p><strong>Summary:</strong> ${summary}</p>
+        <h4>Skills</h4>
+        <p>${skills}</p>
+        <h4>Experience</h4>
+        <p>${experience}</p>
+        <h4>Education</h4>
+        <p>${education}</p>
+        <h4>Projects</h4>
+        <p>${projects}</p>
+        <h4>Certifications</h4>
+        <p>${certifications}</p>
+        <h4>Languages</h4>
+        <p>${languages}</p>
+        <h4>Tools</h4>
+        <p>${tools}</p>
+        <p><strong>LinkedIn:</strong> <a href="${linkedinUrl}" target="_blank">${linkedinUrl}</a></p>
+    `;
+
+    resumeDisplay.innerHTML = resumeContent;
+    pages.form.classList.remove("active");
+    pages.resume.classList.add("active");
+});
+
+
+buttons.downloadResume.addEventListener("click", () => {
+    const resume = document.getElementById("resume-display");
+    html2pdf().from(resume).save("Resume.pdf");
 });
