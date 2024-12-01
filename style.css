@@ -4,7 +4,7 @@ body {
     font-family: Arial, sans-serif;
     background: linear-gradient(to right, #f0f4f8, #e8edf0);
     color: #333;
-    overflow-x: hidden; /* Prevent horizontal scroll */
+    overflow-x: hidden;
 }
 
 .page {
@@ -31,16 +31,14 @@ button:hover {
     background-color: #0056b3;
 }
 
-
 /* Welcome Page Styles */
 #home-page .welcome-content {
     margin-top: 100px;
 }
 
 #home-page .welcome-content h1 {
-    font-size: 4rem; /* Adjust the size as needed */
-    color:#007bff; /* Match one of the circle colors */
-    /*text-shadow: 0 0 10px rgb(255, 255, 255), 0 0 20px rgba(0, 123, 255, 0.4);*/
+    font-size: 4rem;
+    color: #007bff;
     animation: float 4s ease-in-out infinite;
     position: relative;
 }
@@ -55,7 +53,7 @@ button:hover {
     }
 }
 
-
+/* Animated Circles */
 .circle {
     position: absolute;
     border-radius: 50%;
@@ -86,7 +84,6 @@ button:hover {
     background: rgba(0, 123, 255, 0.4);
 }
 
-/* Additional Animated Circles */
 .circle:nth-child(4) {
     width: 80px;
     height: 80px;
@@ -114,6 +111,7 @@ button:hover {
     animation: move-diagonal 12s infinite ease-in-out;
 }
 
+/* Additional Animations */
 @keyframes move {
     0%, 100% {
         transform: translateY(0) translateX(0);
@@ -187,4 +185,12 @@ input, textarea {
 
 h2 {
     margin-bottom: 20px;
+}
+
+h4 {
+    color: #007bff;
+}
+
+p{
+    text-align: center;
 }
