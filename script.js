@@ -77,7 +77,7 @@ buttons.generateResume.addEventListener("click", (event) => {
 });
 
 
-buttons.downloadResume.addEventListener("click", () => {
+buttons.generateResume.addEventListener("click", () => {
     const resume = document.getElementById("resume-display");
     html2pdf().from(resume).save("Resume.pdf");
 });
