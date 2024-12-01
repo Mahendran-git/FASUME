@@ -50,11 +50,11 @@ buttons.generateResume.addEventListener("click", (event) => {
 
     const resumeContent = `
         <h1 style="color: ${borderColor};">${name}</h1>
-        <h4>Email</h4>
+    
         <p>${email}</p>
-        <h4>Phone</h4>
+        
         <p>${phone}</P>
-        <h4>Address</h4>
+    
         <p>${address}</p>
         <h4>Summary</h4>
         <p>${summary}</p>
